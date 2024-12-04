@@ -75,27 +75,30 @@ public class Kiosk {
 
         String foodName = s.nextLine();
 
-        System.out.println("[안내] 해당 메뉴 가격은 얼마인가요?");
-        System.out.print(">>>");
-
-        String priceStr = s.nextLine();
-
+        String priceStr;
         int price;
-        if(isValidNumber(priceStr)) {
-            price = Integer.parseInt(priceStr);
-        } else {
-            System.out.println("[시스템] 숫자만 입력해야 합니다.");
-            return;
-        }
+        do {
+            System.out.println("[안내] 해당 메뉴 가격은 얼마인가요?");
+            System.out.print(">>>");
+            priceStr = s.nextLine();
+
+            if (!isValidNumber(priceStr)) {
+//                price = Integer.parseInt(priceStr);
+                System.out.println("[시스템] 숫자만 입력해야 합니다.");
+            }
+
+        } while (!isValidNumber(priceStr));
+
+        price = Integer.parseInt(priceStr);
         //숫자를 주고 비교하기
         int shopIndex = getShopIndex(shops, shopName);
 
-        if(shopIndex != -1) {
-            boolean isValid = shops.get(shopIndex).addFood(foodName, price);
-            if(!isValid) {
-                System.out.println("[시스템] 동일한 이름의 메뉴를 추가할 수 없습니다.");
-                return;
-            }
+        if (shopIndex != -1) {
+//            boolean isValid = shops.get(shopIndex).addFood(foodName, price);
+//            if(!isValid) {
+            System.out.println("[시스템] 동일한 이름의 메뉴를 추가할 수 없습니다.");
+            return;
+//            }
         } else {
             Shop shop = new Shop(shopName);
             shop.addFood(foodName, price);
